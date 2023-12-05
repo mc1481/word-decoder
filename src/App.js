@@ -4,6 +4,7 @@ import { useState } from 'react';
 import React from "react";
 import { foods, carBrands, dogBreeds, jobs } from './Words';
 import './Home.css';
+import Timer from './Timer';
 
 function App() {
   const [target, setTarget] = useState('');
@@ -11,6 +12,11 @@ function App() {
   const [shuffledWord, setShuffledWord] = useState('');
   const [selectedTopic, setSelectedTopic] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
+  const [isInputEmpty, setIsInputEmpty] = useState(true);
+  const [timerVisible, setTimerVisible] = useState(false);
+  const [isTimerPaused, setIsTimerPaused] = useState(false);
+  const [initialTimer, setInitialTimer] = useState(60);
+  const [timerKey, setTimerKey] = useState(0);
 
   function getRandomInt(n) {
     return Math.floor(Math.random() * n);
@@ -58,6 +64,10 @@ function App() {
     setTarget(selectedWord);
     setShuffledWord(shuffle(selectedWord)); // Shuffle the selected word before setting it as the target
     setIsCorrect(null); // Reset correctness status
+    setIsTimerPaused(false);
+    setInitialTimer(60);
+    setTimerVisible(true);
+    setTimerKey(timerKey + 1);
   }
 
   // set target
@@ -68,17 +78,25 @@ function App() {
   // handle input change
   function handleInputChange(event) {
     setGuess(event.target.value);
+    setIsInputEmpty(event.target.value.trim() === '');
   }
 
   // handle answer submission
   function handleSubmit() {
     if (guess.toLowerCase() === target.toLowerCase()) {
       setIsCorrect(true);
+      setIsTimerPaused(true); // Pause the timer when the answer is correct
     } else {
       setIsCorrect(false);
     }
     // Reset the guess to an empty string after submitting
     setGuess('');
+  }
+
+  function handleTimeUp() {
+    // You can add logic to handle what happens when the timer reaches 0
+    console.log('Time is up!');
+    setTimerVisible(false); // Hide the timer when time is up
   }
 
   return (
@@ -92,6 +110,7 @@ function App() {
           <button className='dogBreeds-button' onClick={() => handleTopicSelect('dogBreeds')}>Dog Breeds</button>
           <button className='jobs-button' onClick={() => handleTopicSelect('jobs')}>Jobs</button>
         </div>
+        {timerVisible && <Timer key={timerKey} initialTime={initialTimer} onTimeUp={handleTimeUp} isPaused={isTimerPaused} />}
         <div className='deshuffle'>
           <p>Deshuffle the word below</p>
           <p>{shuffledWord}</p>
@@ -105,12 +124,14 @@ function App() {
           />
         </div>
         <div className='submit-answer'>
-          <button onClick={handleSubmit}>Submit Answer</button>
+          <button onClick={handleSubmit} disabled={isInputEmpty}>
+              Submit Answer
+            </button>
         </div>
         <div className='response'>
         {isCorrect === true && (
           <>
-            <p>You are correct! The word is {target}</p>
+            <p>You are correct! The word is {target}, select a topic for a new word</p>
           </>
         )}
         {isCorrect === false && <p>You are incorrect, try again.</p>}
