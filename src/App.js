@@ -102,6 +102,7 @@ function App() {
   return (
     <div className="App">
       <h1>Word Decoder</h1>
+      {timerVisible && <Timer key={timerKey} initialTime={initialTimer} onTimeUp={handleTimeUp} isPaused={isTimerPaused} />}
       <div className='home-div'>
         <h1>Choose a topic</h1>
         <div className='topics-container'>
@@ -110,7 +111,7 @@ function App() {
           <button className='dogBreeds-button' onClick={() => handleTopicSelect('dogBreeds')}>Dog Breeds</button>
           <button className='jobs-button' onClick={() => handleTopicSelect('jobs')}>Jobs</button>
         </div>
-        {timerVisible && <Timer key={timerKey} initialTime={initialTimer} onTimeUp={handleTimeUp} isPaused={isTimerPaused} />}
+        
         <div className='deshuffle'>
           <p>Deshuffle the word below</p>
           <p>{shuffledWord}</p>
@@ -131,7 +132,7 @@ function App() {
         <div className='response'>
         {isCorrect === true && (
           <>
-            <p>You are correct! The word is {target}, select a topic for a new word</p>
+            <p>You are correct! You beat the timer! Select a topic for a new word</p>
           </>
         )}
         {isCorrect === false && <p>You are incorrect, try again.</p>}

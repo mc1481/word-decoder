@@ -14,9 +14,13 @@ function Timer({ initialTime, onTimeUp, isPaused }) {
     } else if (timer === 0) {
       // Invoke the callback when the timer reaches 0
       onTimeUp();
+      clearInterval(interval); // Clear the interval after invoking onTimeUp
     }
 
-    return () => clearInterval(interval);
+    // Clear the interval when the component unmounts or when isPaused is true
+    return () => {
+      clearInterval(interval);
+    };
   }, [timer, isPaused, onTimeUp]);
 
   return (
