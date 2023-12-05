@@ -98,6 +98,53 @@ const dogBreeds = [
 
 export {dogBreeds};
 
-  
+const sports = [
+    'football',
+    'soccer',
+    'basketball',
+    'baseball',
+    'tennis',
+    'golf',
+    'rugby',
+    'volleyball',
+    'cricket',
+    'hockey',
+    'swimming',
+    'cycling',
+    'running',
+    'boxing',
+    'surfing',
+    'skiing',
+    'wrestling',
+    'badminton',
+    'tabletennis',
+    'softball'
+];
 
+export {sports};
+
+const celebrities = [
+    'beyoncé',
+    'madonna',
+    'cher',
+    'adele',
+    'rihanna',
+    'shakira',
+    'prince',
+    'eminem',
+    'kanye',
+    'alicia',
+    'usher',
+    'drake',
+    'sia',
+    'ariana',
+    'sting',
+    'enrique',
+    'zendaya',
+    'lorde',
+    'seal',
+    'ringo'
+];
+
+export {celebrities};
   

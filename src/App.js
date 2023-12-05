@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import React from "react";
-import { foods, carBrands, dogBreeds, jobs } from './Words';
+import { foods, carBrands, dogBreeds, jobs, sports, celebrities } from './Words';
 import './Home.css';
 import Timer from './Timer';
 
@@ -57,8 +57,14 @@ function App() {
       case 'jobs':
         selectedWord = jobs[getRandomInt(jobs.length)];
         break;
+      case 'sports':
+        selectedWord = sports[getRandomInt(sports.length)];
+        break;
+      case 'celebrities':
+        selectedWord = celebrities[getRandomInt(celebrities.length)];
+        break;
       default:
-        selectedWord = ''; // Clear target if an unknown topic is selected
+        selectedWord = ''; 
     }
 
     setTarget(selectedWord);
@@ -94,7 +100,6 @@ function App() {
   }
 
   function handleTimeUp() {
-    // You can add logic to handle what happens when the timer reaches 0
     console.log('Time is up!');
     setTimerVisible(false); // Hide the timer when time is up
   }
@@ -110,6 +115,8 @@ function App() {
           <button className='carBrands-button' onClick={() => handleTopicSelect('carBrands')}>Car Brands</button>
           <button className='dogBreeds-button' onClick={() => handleTopicSelect('dogBreeds')}>Dog Breeds</button>
           <button className='jobs-button' onClick={() => handleTopicSelect('jobs')}>Jobs</button>
+          <button className='sports-button' onClick={() => handleTopicSelect('sports')}>Sports</button>
+          <button className='celebrities-button' onClick={() => handleTopicSelect('celebrities')}>Celebrities</button>
         </div>
         
         <div className='deshuffle'>
