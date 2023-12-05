@@ -3,7 +3,7 @@ body {
 }
 
 .home-div {
-    max-width: 65%;
+    max-width: 75%;
     height: 60vh;
     margin: 0 auto; 
     display: flex;
